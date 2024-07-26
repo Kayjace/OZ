@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <title>설문조사</title>
+    <meta name ="author" content ="설문자">
+    <meta name="description" content="설문조사 양식">
+</head>
+
+
+<body>
+    <header>
+        <h1>설문조사 양식</h1>
+    </header>
+
+    <main>
+        <form action="fake_survey.php" method="post">
+
+            <fieldset>
+                <legend>개인 정보</legend>
+                <label for="name">이름:</label>
+                <input type="text" id="name" name="name" placeholder="이름">
+                <br>
+                <label for="age">나이:</label>
+                <input type="number" id="age" name="age" placeholder="나이">
+                <br>
+                <label for="email">이메일:</label>
+                <input type="email" id="email" name="email" placeholder="메일 주소">
+            </fieldset>
+
+            <fieldset>
+                <legend>설문 문항</legend>
+                <p>당신의 성별은 무엇입니까?</p>
+                <input type="radio" id ="male" name="gender">
+                <label for="male">남성</label>
+                <input type="radio" id ="female" name="gender">
+                <label for="female">여성</label>
+                <input type="radio" id ="other" name="gender">
+                <label for="other">그외</label>
+
+                <p>좋아하는 음료를 모두 선택해주세요:</p>
+                <ul>
+                    <li><label><input type="checkbox" name="interest" value="softdrink">소프트 드링크</label></li>
+                    <li><label><input type="checkbox" name="interest" value="sportsdrink">스포츠 드링크</label></li>
+                    <li><label><input type="checkbox" name="interest" value="coffee">커피</label></li>
+                </ul>
+            </fieldset>
+
+            <fieldset>
+                <legend>기타 의견</legend>
+                <textarea id="feedback" name="feedback" cols="50" rows="4"></textarea>
+            </fieldset>
+
+            <br>
+            <input type="submit" value="제출">
+        </form>
+    </main>
+
+
+    <footer>
+        <p>설문 입력 고생하셨습니다.</p>
+    </footer>
+</body>
+</html>
