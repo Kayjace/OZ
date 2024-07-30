@@ -1,22 +1,29 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Page</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 </head>
 <style>
     .short-select {
-        width: 150px; /* Adjust this value to your desired width */
+        width: 150px;
+        /* Adjust this value to your desired width */
     }
 </style>
-<body>   
+
+<body>
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#"><img src = "https://i.namu.wiki/i/TzNoXw8pP9JTAtztdigof-bT1Ix2ahdTfX-hr6Wc3VCw8SOK68WtM7oJ9tCk4DYqyMCfIL0H2mYred0fPz5ukg.webp" height="40" width="auto"></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <a class="navbar-brand" href="#"><img
+                    src="https://i.namu.wiki/i/TzNoXw8pP9JTAtztdigof-bT1Ix2ahdTfX-hr6Wc3VCw8SOK68WtM7oJ9tCk4DYqyMCfIL0H2mYred0fPz5ukg.webp"
+                    height="40" width="auto"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -28,8 +35,8 @@
     </nav>
 
     <div class="container mt-5">
-            <!-- Current Date and Time -->
-    <div id="date-time" class="mb-4 text-end"></div>
+        <!-- Current Date and Time -->
+        <div id="date-time" class="mb-4 text-end"></div>
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h3 class="mb-0">신규 등록 상품</h3>
             <div class="form-check form-switch">
@@ -38,24 +45,24 @@
             </div>
         </div>
         <!-- Search Form -->
-        <form class="row g-3 align-items-center mb-4">      
+        <form class="row g-3 align-items-center mb-4">
             <div class="col-lg-2 col-md-4">
                 <label class="visually-hidden" for="inlineFormSelectPref">카테고리 선택</label>
-                <select class="form-select" id="inlineFormSelectPref">
+                <select class="form-select" id="inlineFormSelectPref" onchange="filterData()">
                     <option selected>카테고리</option>
-                    <option value="top">상의</option>
-                    <option value="bottom">하의</option>
-                    <option value="shoes">신발</option>
-                    <option value="acc">패션잡화</option>
+                    <option value="상의">상의</option>
+                    <option value="하의">하의</option>
+                    <option value="신발">신발</option>
+                    <option value="패션잡화">패션잡화</option>
                 </select>
             </div>
             <div class="col-lg-1 col-md-4">
                 <label class="visually-hidden" for="cloth_gender">Preference</label>
-                <select class="form-select" id="cloth_gender">
-                    <option class = 'gender' value="전체" selected>성별</option>
-                    <option class = 'gender' value="남성">남성</option>
-                    <option class = 'gender' value="여성">여성</option>
-                    <option class = 'gender' value="공용">공용</option>
+                <select class="form-select" id="cloth_gender" onchange="filterData()">
+                    <option selected>성별</option>
+                    <option class='gender' value="male">남성</option>
+                    <option class='gender' value="female">여성</option>
+                    <option class='gender' value="unisex">공용</option>
                 </select>
             </div>
             <div class="col-lg-4 col-md-6">
@@ -63,7 +70,7 @@
                 <input class="form-control" type="text" id="specname" placeholder="제품명을 입력해 주세요">
             </div>
             <div class="col-auto">
-                <button type="button" class="btn btn-primary">조회</button>
+                <button type="button" class="btn btn-primary" id="searchButton" onclick="searchProducts()">검색</button>
             </div>
         </form>
 
@@ -74,6 +81,7 @@
                     <tr>
                         <th scope="col">카테고리</th>
                         <th scope="col">브랜드</th>
+                        <th scope="col">성별</th>
                         <th scope="col">상품명</th>
                         <th scope="col">가격</th>
                     </tr>
@@ -91,56 +99,87 @@
             </ul>
         </nav>
     </div>
-
- 
     <script>
         const data = [
-            { category: "상의", brand: 'Supreme', product: '슈프림 박스로고 후드티', price: '390,000' },
-            { category: "하의", brand: 'DIESEL', product: '디젤 트랙 팬츠', price: '188,000' },
-            { category: "신발", brand: 'Nike', product: '에어포스 1', price: '137,000' },
-            { category: "패션잡화", brand: 'Music&Goods', product: '빵빵이 키링', price: '29,000' },
-            { category: "상의", brand: 'Adidas', product: '아디다스 티셔츠', price: '49,000' },
-            { category: "하의", brand: 'Levi\'s', product: '리바이스 청바지', price: '89,000' },
-            { category: "신발", brand: 'Puma', product: '푸마 스니커즈', price: '75,000' },
-            { category: "패션잡화", brand: 'Louis Vuitton', product: '루이비통 지갑', price: '890,000' },
-            { category: "상의", brand: 'Nike', product: '나이키 후드티', price: '110,000' },
-            { category: "하의", brand: 'H&M', product: 'H&M 스커트', price: '45,000' },
-            { category: "신발", brand: 'Reebok', product: '리복 운동화', price: '95,000' },
-            { category: "패션잡화", brand: 'Gucci', product: '구찌 벨트', price: '450,000' },
+            { category: "상의", gender: 'unisex', brand: 'Supreme', product: '슈프림 박스로고 후드티', price: '390,000' },
+            { category: "하의", gender: 'unisex', brand: 'DIESEL', product: '디젤 트랙 팬츠', price: '188,000' },
+            { category: "신발", gender: 'male', brand: 'Nike', product: '에어포스 1', price: '137,000' },
+            { category: "패션잡화", gender: 'unisex', brand: 'Music&Goods', product: '빵빵이 키링', price: '29,000' },
+            { category: "상의", gender: 'unisex', brand: 'Adidas', product: '아디다스 티셔츠', price: '49,000' },
+            { category: "하의", gender: 'female', brand: 'Levi\'s', product: '리바이스 청바지', price: '89,000' },
+            { category: "신발", gender: 'male', brand: 'Puma', product: '푸마 스니커즈', price: '75,000' },
+            { category: "패션잡화", gender: 'female', brand: 'Louis Vuitton', product: '루이비통 지갑', price: '890,000' },
+            { category: "상의", gender: 'unisex', brand: 'Nike', product: '나이키 후드티', price: '110,000' },
+            { category: "하의", gender: 'female', brand: 'H&M', product: 'H&M 스커트', price: '45,000' },
+            { category: "신발", gender: 'unisex', brand: 'Reebok', product: '리복 운동화', price: '95,000' },
+            { category: "패션잡화", gender: 'male', brand: 'Gucci', product: '구찌 벨트', price: '450,000' },
+            { category: "상의", gender: 'female', brand: 'Zara', product: '자라 블라우스', price: '35,000' },
+            { category: "하의", gender: 'male', brand: 'Uniqlo', product: '유니클로 치노 팬츠', price: '29,000' },
+            { category: "신발", gender: 'female', brand: 'Converse', product: '컨버스 척테일러', price: '65,000' },
+            { category: "패션잡화", gender: 'male', brand: 'Ray-Ban', product: '레이밴 선글라스', price: '150,000' },
+            { category: "상의", gender: 'unisex', brand: 'Stussy', product: '스투시 티셔츠', price: '59,000' },
+            { category: "하의", gender: 'female', brand: 'GU', product: '지유 플리츠 스커트', price: '39,000' },
+            { category: "신발", gender: 'unisex', brand: 'New Balance', product: '뉴발란스 990', price: '200,000' },
+            { category: "패션잡화", gender: 'female', brand: 'Chanel', product: '샤넬 핸드백', price: '2,500,000' },
+            { category: "상의", gender: 'male', brand: 'Tommy Hilfiger', product: '타미 힐피거 셔츠', price: '79,000' },
+            { category: "하의", gender: 'unisex', brand: 'Nike', product: '나이키 조거 팬츠', price: '69,000' },
+            { category: "신발", gender: 'female', brand: 'Vans', product: '반스 올드스쿨', price: '55,000' },
+            { category: "패션잡화", gender: 'unisex', brand: 'Herschel', product: '허쉘 백팩', price: '99,000' }
             // Add more items as needed...
         ];
+
 
         const itemsPerPage = 4; // Number of items per page
         let currentPage = 1; // Current page number
 
-        // Function to display the data for the current page
-        function displayData() {
+
+        function filterData() {
+            const selectedCategory = document.getElementById('inlineFormSelectPref').value;
+            const selectedGender = document.getElementById('cloth_gender').value;
+            const searchText = document.getElementById('specname').value.toLowerCase(); // Get search text and convert to lower case
+
+            const filteredData = data.filter(item => {
+                const categoryMatch = selectedCategory === '카테고리' || item.category === selectedCategory;
+                const genderMatch = selectedGender === '성별' || item.gender === selectedGender;
+                const nameMatch = item.product.toLowerCase().includes(searchText); // Check if product name includes the search text
+                return categoryMatch && genderMatch && nameMatch;
+            });
+
+            displayFilteredData(filteredData);
+        }
+
+        function searchProducts() {
+            filterData(); // Call the filterData function to refresh data display based on current filters and search input
+        }
+
+        function displayFilteredData(filteredData) {
             const dataTable = document.getElementById('data-table');
             dataTable.innerHTML = ''; // Clear existing data
 
             // Calculate start and end indices for slicing the data array
             const start = (currentPage - 1) * itemsPerPage;
             const end = start + itemsPerPage;
-            const paginatedData = data.slice(start, end);
+            const paginatedData = filteredData.slice(start, end);
 
             // Populate the table with the paginated data
             paginatedData.forEach(item => {
                 const row = dataTable.insertRow();
                 row.insertCell(0).innerHTML = item.category;
                 row.insertCell(1).innerHTML = item.brand;
-                row.insertCell(2).innerHTML = item.product;
-                row.insertCell(3).innerHTML = item.price;
+                row.insertCell(2).innerHTML = item.gender;
+                row.insertCell(3).innerHTML = item.product;
+                row.insertCell(4).innerHTML = item.price;
             });
 
-            updatePagination();
+            updatePagination(filteredData.length);
         }
 
-        // Function to update the pagination controls
-        function updatePagination() {
+
+        function updatePagination(totalItems) {
             const pagination = document.getElementById('pagination');
             pagination.innerHTML = ''; // Clear existing pagination
 
-            const totalPages = Math.ceil(data.length / itemsPerPage);
+            const totalPages = Math.ceil(totalItems / itemsPerPage);
 
             // Create Previous button
             const prevLi = document.createElement('li');
@@ -149,11 +188,11 @@
             prevA.className = 'page-link';
             prevA.href = '#';
             prevA.innerText = '<<';
-            prevA.addEventListener('click', function(e) {
+            prevA.addEventListener('click', function (e) {
                 e.preventDefault(); // Prevent default link behavior
                 if (currentPage > 1) {
                     currentPage--; // Decrement current page
-                    displayData(); // Refresh data display
+                    filterData(); // Refresh data display
                 }
             });
             prevLi.appendChild(prevA);
@@ -167,10 +206,10 @@
                 a.className = 'page-link';
                 a.href = '#';
                 a.innerText = i;
-                a.addEventListener('click', function(e) {
+                a.addEventListener('click', function (e) {
                     e.preventDefault(); // Prevent default link behavior
                     currentPage = i; // Set current page
-                    displayData(); // Refresh data display
+                    filterData(); // Refresh data display
                 });
                 li.appendChild(a);
                 pagination.appendChild(li);
@@ -183,11 +222,11 @@
             nextA.className = 'page-link';
             nextA.href = '#';
             nextA.innerText = '>>';
-            nextA.addEventListener('click', function(e) {
+            nextA.addEventListener('click', function (e) {
                 e.preventDefault(); // Prevent default link behavior
                 if (currentPage < totalPages) {
                     currentPage++; // Increment current page
-                    displayData(); // Refresh data display
+                    filterData(); // Refresh data display
                 }
             });
             nextLi.appendChild(nextA);
@@ -204,7 +243,7 @@
 
         // Call the function initially to display the date and time
         updateDateTime();
-        
+
         // Update the date and time every second
         setInterval(updateDateTime, 1000);
 
@@ -213,15 +252,18 @@
             document.documentElement.setAttribute("data-bs-theme", "light"); // or "dark" based on your preference
         }
 
-        document.getElementById("flexSwitchCheckChecked").addEventListener('change', function() {
+        document.getElementById("flexSwitchCheckChecked").addEventListener('change', function () {
             const currentTheme = document.documentElement.getAttribute("data-bs-theme");
             const newTheme = currentTheme === "light" ? "dark" : "light";
             document.documentElement.setAttribute("data-bs-theme", newTheme);
         });
 
         // Display the initial data
-        displayData();
+        filterData();
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
 </body>
+
 </html>
