@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입</title>
+    <link rel="stylesheet" href="join.css">
+</head>
+<body>
+    
+    <div id="container">
+        <form action="#" id="form">
+            <table class="table">
+                <tr>
+                    <th>아이디</th>
+                    <td>
+                        <input name="id" placeholder="6글자 이상 입력해주세요" autocomplete="off" required>
+                    </td>
+                </tr>
+                <tr>
+                    <th>비밀번호</th>
+                    <td>
+                        <input type="password" name="pw1" placeholder="비밀번호">
+                    </td>
+                </tr>
+                <tr>
+                    <th>비밀번호 확인</th>
+                    <td>
+                        <input type="password" name="pw2" placeholder="비밀번호와 일치해야 합니다">
+                    </td>
+                </tr>
+                <tr>
+                    <th>이름</th>
+                    <td>
+                        <input name="name" placeholder="실명을 입력해주세요" autocomplete="off" required>
+                    </td>
+                </tr>
+                <tr>
+                    <th>성별</th>
+                    <td>
+                        <label>
+                            <input type="radio" name="gender" value="male" checked>남자
+                        </label>
+                        <label>
+                            <input type="radio" name="gender" value="female">여자
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <th>전화번호</th>
+                    <td>
+                        <input name="phone" placeholder="휴대전화 번호" autocomplete="off" required>
+                    </td>
+                </tr>
+                <tr>
+                    <th>회원 성향</th>
+                    <td>
+                        <select name="purpose">
+                            <option value="collector">수집가</option>
+                            <option value="reseller">판매자</option>
+                            <option value="both">둘 다</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>이메일</th>
+                    <td>
+                        <input placeholder="test@example.com" type="email" name="email" autocomplete="off" required>
+                    </td>
+                </tr>
+                <tr>
+                    <th>프로필</th>
+                    <td>
+                        <textarea name="intro"></textarea>
+                    </td>
+                </tr>
+            </table>
+            <div class="buttons">
+                <input type="submit" value="가입" class="btn" title="가입">
+                <input type="reset" value="리셋" class="btn" title="처음으로">
+            </div>
+
+        </form>
+    </div>
+
+    <script src="join.js"></script>
+</body>
+</html>

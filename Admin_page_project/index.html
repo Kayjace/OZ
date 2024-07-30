@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+</head>
+<style>
+    .short-select {
+        width: 150px; /* Adjust this value to your desired width */
+    }
+</style>
+<body>   
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"><img src = "https://i.namu.wiki/i/TzNoXw8pP9JTAtztdigof-bT1Ix2ahdTfX-hr6Wc3VCw8SOK68WtM7oJ9tCk4DYqyMCfIL0H2mYred0fPz5ukg.webp" height="40" width="auto"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <div class="ms-auto">
+                    <a href="./join.html" class="btn btn-outline-secondary">Sign up</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+            <!-- Current Date and Time -->
+    <div id="date-time" class="mb-4 text-end"></div>
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h3 class="mb-0">신규 등록 상품</h3>
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked">
+                <label class="form-check-label" for="flexSwitchCheckChecked">다크모드 전환</label>
+            </div>
+        </div>
+        <!-- Search Form -->
+        <form class="row g-3 align-items-center mb-4">      
+            <div class="col-lg-2 col-md-4">
+                <label class="visually-hidden" for="inlineFormSelectPref">카테고리 선택</label>
+                <select class="form-select" id="inlineFormSelectPref">
+                    <option selected>카테고리</option>
+                    <option value="top">상의</option>
+                    <option value="bottom">하의</option>
+                    <option value="shoes">신발</option>
+                    <option value="acc">패션잡화</option>
+                </select>
+            </div>
+            <div class="col-lg-1 col-md-4">
+                <label class="visually-hidden" for="cloth_gender">Preference</label>
+                <select class="form-select" id="cloth_gender">
+                    <option class = 'gender' value="전체" selected>성별</option>
+                    <option class = 'gender' value="남성">남성</option>
+                    <option class = 'gender' value="여성">여성</option>
+                    <option class = 'gender' value="공용">공용</option>
+                </select>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <label class="visually-hidden" for="specname">제품명</label>
+                <input class="form-control" type="text" id="specname" placeholder="제품명을 입력해 주세요">
+            </div>
+            <div class="col-auto">
+                <button type="button" class="btn btn-primary">조회</button>
+            </div>
+        </form>
+
+        <!-- Data Table -->
+        <div class="mt-3">
+            <table class="table table-sm table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">카테고리</th>
+                        <th scope="col">브랜드</th>
+                        <th scope="col">상품명</th>
+                        <th scope="col">가격</th>
+                    </tr>
+                </thead>
+                <tbody id="data-table">
+                    <!-- Data will be inserted here -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pagination -->
+        <nav aria-label="Page navigation example" class="mt-4">
+            <ul class="pagination justify-content-center">
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <script>
+        // Function to update the current date and time
+        function updateDateTime() {
+            const now = new Date();
+            const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
+            const formattedDate = now.toLocaleString('ko-KR', options);
+            document.getElementById('date-time').innerText = `${formattedDate}`;
+        }
+
+        // Call the function initially to display the date and time
+        updateDateTime();
+        
+        // Update the date and time every second
+        setInterval(updateDateTime, 1000);
+
+
+        // Initialize the theme on page load
+        if (!document.documentElement.hasAttribute("data-bs-theme")) {
+            document.documentElement.setAttribute("data-bs-theme", "light"); // or "dark" based on your preference
+        }
+
+        document.getElementById("flexSwitchCheckChecked").addEventListener('change', function() {
+            const currentTheme = document.documentElement.getAttribute("data-bs-theme");
+            const newTheme = currentTheme === "light" ? "dark" : "light";
+            document.documentElement.setAttribute("data-bs-theme", newTheme);
+        });
+
+        // Sample data for the table
+        const data = [
+            { category: "상의", brand: 'Supreme', product: '슈프림 박스로고 후드티', price: '390,000' },
+            { category: "하의", brand: 'DIESEL', product: '디젤 트랙 팬츠', price: '188,000' },
+            { category: "신발", brand: 'Nike', product: '에어포스 1', price: '137,000' },
+            { category: "패션잡화", brand: 'Music&Goods', product: '빵빵이 키링', price: '29,000' },
+            // Add more items as needed...
+        ];
+        
+        const dataTable = document.getElementById('data-table');
+        
+        data.forEach((item) => {
+            const row = dataTable.insertRow();
+            row.insertCell(0).innerHTML = item.category;
+            row.insertCell(1).innerHTML = item.brand;
+            row.insertCell(2).innerHTML = item.product;
+            row.insertCell(3).innerHTML = item.price;
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+</body>
+</html>
