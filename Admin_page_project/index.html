@@ -45,7 +45,7 @@
             </div>
         </div>
         <!-- Search Form -->
-        <form class="row g-3 align-items-center mb-4">
+        <form class="row g-3 align-items-center mb-4" id="searchForm">
             <div class="col-lg-2 col-md-4">
                 <label class="visually-hidden" for="inlineFormSelectPref">카테고리 선택</label>
                 <select class="form-select" id="inlineFormSelectPref" onchange="filterData()">
@@ -147,6 +147,33 @@
 
             displayFilteredData(filteredData);
         }
+        document.addEventListener('DOMContentLoaded', function () {
+            const searchForm = document.getElementById('searchForm');
+            const searchInput = document.getElementById('specname');
+            const searchButton = document.getElementById('searchButton');
+
+            // Function to trigger search
+            function searchProducts() {
+                filterData(); // Call the filterData function to refresh data display based on current filters and search input
+            }
+
+            // Prevent form submission when pressing Enter
+            searchForm.addEventListener('submit', function (event) {
+                event.preventDefault(); // Prevent the form from submitting
+            });
+
+            // Event listener for Enter key press in the search input
+            searchInput.addEventListener('keydown', function (event) {
+                if (event.key === 'Enter') {
+                    event.preventDefault(); // Prevent default form submission behavior
+                    searchProducts(); // Trigger the search
+                }
+            });
+
+            // Event listener for the search button click
+            searchButton.addEventListener('click', searchProducts);
+        });
+
 
         function searchProducts() {
             filterData(); // Call the filterData function to refresh data display based on current filters and search input
