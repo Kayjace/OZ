@@ -90,8 +90,13 @@ def play_game(board_size):
 
 # 메인 함수 정의 및 호출
 def main():
-    board_size = 5  # 보드 크기를 5x5로 설정
-    play_game(board_size)
+    try:
+        board_size = 5  # 보드 크기를 5x5로 설정
+        if board_size <= 0:
+            raise ValueError("보드 크기는 1보다 커야 합니다.")
+        play_game(board_size)
+    except ValueError as e:
+        print(f"입력 오류: {e}")
 
 if __name__ == "__main__":
     main()
