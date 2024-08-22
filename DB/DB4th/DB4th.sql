@@ -1,0 +1,100 @@
+-- - **1. 생성 (CREATE) - 25 문제(필수 : 초급 10문제 / 도전 : 중급 + 고급 15문제)**
+--     - 초급
+--         
+--         (1) **`customers`** 테이블에 새 고객을 추가하세요.
+--         INSERT INTO customers (name, phone, ...) VALUES ('John', '12345', ...);
+--         (2) **`products`** 테이블에 새 제품을 추가하세요.
+--         INSERT INTO products (name, price, ...) VALUES ('book', 2.5, ...);
+--         (3) **`employees`** 테이블에 새 직원을 추가하세요.
+--         INSERT INTO employees (name, phone, ...) VALUES ('John', '12345', ...);
+--         (4) **`offices`** 테이블에 새 사무실을 추가하세요.
+--         INSERT INTO offices (name, phone, ...) VALUES ('John', '12345', ...);
+--         (5) **`orders`** 테이블에 새 주문을 추가하세요.
+--         INSERT INTO orders (customerID, orderID, ...) VALUES (1, 3, ...)
+--         (6) **`orderdetails`** 테이블에 주문 상세 정보를 추가하세요.
+--         INSERT INTO orderdetails (productID, amoutn, ...) VALUES (2, 1, ...)
+--         (7) **`payments`** 테이블에 지불 정보를 추가하세요.
+--         INSERT INTO payments (cusmterID, payamount, ...) VALUES (1, 100, ...)
+--         (8) **`productlines`** 테이블에 제품 라인을 추가하세요.
+--         INSERT INTO productlines (lineID, productID, ...) VALUES (1, 3, ...)
+--         (9) **`customers`** 테이블에 다른 지역의 고객을 추가하세요.
+--         INSERT INTO customers (name, state, city,  ...) VALUES ('John', 'Oregon', 'Portland', ...)
+--         (10) **`products`** 테이블에 다른 카테고리의 제품을 추가하세요.
+--   	   INSERT INTO products (category, productID, ...) VALUES ('Cosmetic', 1, ...)
+--     - 중급
+--         
+--         (1) **`customers`** 테이블에 여러 고객을 한 번에 추가하세요.
+--         INSERT INTO customers (name, phone, ...) VALUES ('John', '12345', ...);, ('Tom', '67890', ...);
+--         (4) **`orders`**와 **`orderdetails`**에 연결된 주문을 한 번에 추가하세요.
+--         INSERT INTO orders (customerID, orderID, ...) VALUES (1, 2, ...); INSERT INTO orderdetails (productID, amoutn, ...) VALUES (2, 1, ...);
+
+
+-- - **2. 읽기 (READ) - 25 문제(필수 : 초급 10문제 / 도전 : 중급 + 고급 15문제)**
+--     - 초급
+--         
+--         (1) **`customers`** 테이블에서 모든 고객 정보를 조회하세요.
+--         SELECT * FROM customers;
+--         (2) **`products`** 테이블에서 모든 제품 목록을 조회하세요.
+--         SELECT * FROM products;
+--         (3) **`employees`** 테이블에서 모든 직원의 이름과 직급을 조회하세요.
+--         SELECT name, position FROM employees;
+--         (4) **`offices`** 테이블에서 모든 사무실의 위치를 조회하세요.
+--         SELECT location FROM offices;
+--         (5) **`orders`** 테이블에서 최근 10개의 주문을 조회하세요.
+--         SELECT * FROM orders ORDER BY orderDate DESC LIMIT 10;
+--         (6) **`orderdetails`** 테이블에서 특정 주문의 모든 상세 정보를 조회하세요.
+--         SELECT * FROM orderdetails WHERE orderID=1;
+--         (7) **`payments`** 테이블에서 특정 고객의 모든 지불 정보를 조회하세요.
+--         SELECT * FROM payments WHERE customerID=1;
+--         (8) **`productlines`** 테이블에서 각 제품 라인의 설명을 조회하세요.
+--         SELECT productlineID, description FROM productlines;
+--         (9) **`customers`** 테이블에서 특정 지역의 고객을 조회하세요.
+--         SELECT * FROM customers WHERE city ='Seoul';
+--         (10) **`products`** 테이블에서 특정 가격 범위의 제품을 조회하세요.
+--         SELECT * FROM products WHERE price BETWEEN 10.00 AND 100.00;
+
+
+-- - **3. 갱신 (UPDATE) - 25 문제(필수 : 초급 10문제 / 도전 : 중급 + 고급 15문제)**
+--     - 초급
+--         
+--         (1) **`customers`** 테이블에서 특정 고객의 주소를 갱신하세요.
+--         UPDATE customers SET address = '새로운 주소' WHERE customerID = 특정_고객_ID;
+--         (2) **`products`** 테이블에서 특정 제품의 가격을 갱신하세요.
+--         UPDATE products SET price = 새로운_가격 WHERE productID = 특정_제품_ID;
+--         (3) **`employees`** 테이블에서 특정 직원의 직급을 갱신하세요.
+--         UPDATE employees SET position = '새로운 직급' WHERE employeeID = 특정_직원_ID;
+--         (4) **`offices`** 테이블에서 특정 사무실의 전화번호를 갱신하세요.
+--         UPDATE offices SET phoneNumber = '새로운 전화번호' WHERE officeID = 특정_사무실_ID;
+--         (5) **`orders`** 테이블에서 특정 주문의 상태를 갱신하세요.
+--         UPDATE orders SET status = '새로운 상태' WHERE orderID = 특정_주문_ID;
+--         (6) **`orderdetails`** 테이블에서 특정 주문 상세의 수량을 갱신하세요.
+--         UPDATE orderdetails SET quantity = 새로운_수량 WHERE orderID = 특정_주문_ID AND productID = 특정_제품_ID;
+--         (7) **`payments`** 테이블에서 특정 지불의 금액을 갱신하세요.
+--         UPDATE payments SET amount = 새로운_금액 WHERE paymentID = 특정_지불_ID;
+--         (8) **`productlines`** 테이블에서 특정 제품 라인의 설명을 갱신하세요.
+--         UPDATE productlines SET description = '새로운 설명' WHERE productLine = 특정_제품라인_ID;
+--         (9) **`customers`** 테이블에서 특정 고객의 이메일을 갱신하세요.
+--         UPDATE customers SET email = '새로운 이메일' WHERE customerID = 특정_고객_ID;
+-- - **4. 삭제 (DELETE) - 25 문제(필수 : 초급 10문제 / 도전 : 중급 + 고급 15문제)**
+--     - 초급
+--         
+--         (1) **`customers`** 테이블에서 특정 고객을 삭제하세요.
+--         DELETE FROM customers WHERE customerID = 특정_고객_ID;
+--         (2) **`products`** 테이블에서 특정 제품을 삭제하세요.
+--         DELETE FROM products WHERE productID = 특정_제품_ID;
+--         (3) **`employees`** 테이블에서 특정 직원을 삭제하세요.
+--         DELETE FROM employees WHERE employeeID = 특정_직원_ID;
+--         (4) **`offices`** 테이블에서 특정 사무실을 삭제하세요.
+--         DELETE FROM offices WHERE officeID = 특정_사무실_ID;
+--         (5) **`orders`** 테이블에서 특정 주문을 삭제하세요.
+--         DELETE FROM orders WHERE orderID = 특정_주문_ID;
+--         (6) **`orderdetails`** 테이블에서 특정 주문 상세를 삭제하세요.
+--         DELETE FROM orderdetails WHERE orderID = 특정_주문_ID
+--         (7) **`payments`** 테이블에서 특정 지불 내역을 삭제하세요.
+--         DELETE FROM payments WHERE paymentID = 특정_지불_ID;
+--         (8) **`productlines`** 테이블에서 특정 제품 라인을 삭제하세요.
+--         DELETE FROM productlines WHERE productLine = 특정_제품라인_ID;
+--         (9) **`customers`** 테이블에서 특정 지역의 모든 고객을 삭제하세요.
+--         DELETE FROM customers WHERE region = 특정_지역;
+--         (10) **`products`** 테이블에서 특정 카테고리의 모든 제품을 삭제하세요.
+-- DELETE FROM products WHERE category = 특정_카테고리;
