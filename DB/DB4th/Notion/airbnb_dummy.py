@@ -98,6 +98,7 @@ with conn.cursor() as cursor:
 #1. **새로운 제품 추가**: Python 스크립트를 사용하여 'Products' 테이블에 새로운 제품을 추가하세요. 예를 들어, "Python Book"이라는 이름의 제품을 29.99달러 가격으로 추가합니다.
     add_sql = "INSERT INTO Products (productName, price, stockQuantity, createDate) VALUES (%s, %s, %s, %s)"
     cursor.execute(add_sql, ('Python Book', 29.99, 50, '2024-07-15 03:36:32'))
+    print(f"New product added")
     conn.commit()
 
 #2. **고객 목록 조회**: 'Customers' 테이블에서 모든 고객의 정보를 조회하는 Python 스크립트를 작성하세요.
@@ -112,6 +113,7 @@ with conn.cursor() as cursor:
     if check_stock_and_update(quantity_sold, product_id, cursor, conn):
         update_sql = "UPDATE Products SET stockQuantity = stockQuantity - %s WHERE productID = %s"
         cursor.execute(update_sql, (quantity_sold, product_id))
+        print(f"product{product_id} sold {quantity_sold}, stock amount updated.")
         conn.commit()
 
 #4. **고객별 총 주문 금액 계산**: 'Orders' 테이블을 사용하여 각 고객별로 총 주문 금액을 계산하는 Python 스크립트를 작성하세요.
@@ -125,17 +127,19 @@ with conn.cursor() as cursor:
     customer_id = 1
     update_email_sql = "UPDATE Customers SET email = %s WHERE customerID = %s"
     cursor.execute(update_email_sql, (new_email, customer_id))
+    print(f"customer{customer_id}'s email updated to {new_email}")
     conn.commit()
 
 #6. **주문 취소**: 주문을 취소하는 Python 스크립트를 작성하세요. 주문 ID를 입력받아 해당 주문을 'Orders' 테이블에서 삭제합니다.
     order_id = 2
     del_order_sql = "DELETE FROM Orders WHERE orderID = %s"
     cursor.execute(del_order_sql, (order_id,))
+    print(f"deleted order {order_id}")
     conn.commit()
 
 #7. **특정 제품 검색**: 제품 이름을 기반으로 'Products' 테이블에서 제품을 검색하는 Python 스크립트를 작성하세요.
     select_prod_sql = "SELECT * FROM Products WHERE productName LIKE %s"
-    cursor.execute(select_prod_sql, ('%Book%'))
+    cursor.execute(select_prod_sql, ('Python%'))
     for row in cursor.fetchall():
         print(row)
 
